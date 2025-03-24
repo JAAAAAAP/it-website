@@ -3,12 +3,14 @@ import { cn } from '@/utilities/ui'
 import useClickableCard from '@/utilities/useClickableCard'
 import Link from 'next/link'
 import React, { Fragment } from 'react'
+import { Badge } from "@/components/ui/badge"
+
 
 import type { Post } from '@/payload-types'
 
 import { Media } from '@/components/Media'
 
-export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title'>
+export type CardPostData = Pick<Post, 'slug' | 'categories' | 'meta' | 'title' >
 
 export const Card: React.FC<{
   alignItems?: 'center'
@@ -29,21 +31,22 @@ export const Card: React.FC<{
   const sanitizedDescription = description?.replace(/\s/g, ' ') // replace non-breaking space with white space
   const href = `/${relationTo}/${slug}`
 
+
   return (
     <article
       className={cn(
-        'border border-border rounded-lg overflow-hidden bg-card hover:cursor-pointer',
+        'shadow-lg dark:bg-white dark:text-black rounded-lg overflow-hidden hover:cursor-pointer',
         className,
       )}
       ref={card.ref}
     >
-      <div className="relative w-full ">
+      <div className="relative w-full h-60">
         {!metaImage && <div className="">No image</div>}
-        {metaImage && typeof metaImage !== 'string' && <Media resource={metaImage} size="33vw" />}
+        {metaImage && typeof metaImage !== 'string' && <Media resource={metaImage} fill imgClassName='object-cover' />}
       </div>
-      <div className="p-4">
+      <div className="py-2 px-2">
         {showCategories && hasCategories && (
-          <div className="uppercase text-sm mb-4">
+          <Badge variant="outline" className="uppercase text-sm text-black border-yellow-500 hover:bg-yellow-500 hover:text-white">
             {showCategories && hasCategories && (
               <div>
                 {categories?.map((category, index) => {
@@ -66,7 +69,7 @@ export const Card: React.FC<{
                 })}
               </div>
             )}
-          </div>
+          </Badge>
         )}
         {titleToUse && (
           <div className="prose">
