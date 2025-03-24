@@ -5,7 +5,11 @@ import React from 'react'
 import type { Header } from '@/payload-types'
 
 export async function Header() {
-  const headerData: Header = await getCachedGlobal('header', 1)()
+  const globalData = await getCachedGlobal('header', 1)()
 
-  return <HeaderClient data={headerData} />
+if (!globalData || !('logo' in globalData)) {
+  throw new Error("Invalid data: Expected Header but got something else")
+}
+
+  return <HeaderClient data={globalData as Header} />
 }

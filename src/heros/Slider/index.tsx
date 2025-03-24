@@ -25,7 +25,7 @@ export const SliderHero: React.FC<Page['hero']> = ({ silderMedia }) => {
               width={100}
               height={680}
               src={
-                typeof items.mediaSilder === 'object'
+                typeof items.mediaSilder === 'object' && items.mediaSilder?.url
                   ? items.mediaSilder?.url
                   : `/api/media/${items.mediaSilder}`
               }
@@ -33,7 +33,8 @@ export const SliderHero: React.FC<Page['hero']> = ({ silderMedia }) => {
             />
             <Link
               href={
-                items.sliderReference === 'reference'
+                items.sliderReference === 'reference' && 
+                typeof items.referenceSilderLink?.value === 'object' && 'slug' in items.referenceSilderLink?.value
                   ? `/${items.referenceSilderLink?.relationTo}/${items.referenceSilderLink?.value?.slug}`
                   : items.Customurl || '#'
               }
