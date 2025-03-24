@@ -24,6 +24,10 @@ export default async function Page() {
       slug: true,
       categories: true,
       meta: true,
+      header: true, // เพิ่มฟิลด์ header ถ้ามี
+      authors: true, // เพิ่มฟิลด์ authors ถ้าจำเป็น
+      publishedAt: true, // เพิ่มฟิลด์อื่นๆ ที่อาจจำเป็น
+      // เพิ่มฟิลด์อื่นๆ ที่จำเป็นสำหรับ CollectionArchive
     },
   })
 
